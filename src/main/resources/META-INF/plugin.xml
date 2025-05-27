@@ -12,4 +12,13 @@
         <toolWindow factoryClass="com.github.allexnik.dataframequickfixplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <postStartupActivity implementation="com.github.allexnik.dataframequickfixplugin.startup.MyProjectActivity" />
     </extensions>
+
+    <actions>
+        <action id="SayHelloAction"
+                class="com.github.allexnik.dataframequickfixplugin.HelloAction"
+                text="Say Hello"
+                description="Says hello from a new plugin">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>

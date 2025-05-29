@@ -1,5 +1,6 @@
 package com.github.allexnik.dataframequickfixplugin.inspections
 
+import com.github.allexnik.dataframequickfixplugin.quickfixes.AddColumnFix
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.codeInspection.util.InspectionMessage
 import org.jetbrains.kotlin.analysis.api.KaSession
@@ -22,9 +23,8 @@ class AddColumnInspection : KotlinApplicableInspectionBase.Simple<KtQualifiedExp
         return KotlinBundle.message("column.name.may.be.moved.into.builder.dsl")
     }
 
-    override fun createQuickFix(element: KtQualifiedExpression, context: Unit): KotlinModCommandQuickFix<KtQualifiedExpression> {
-        TODO("Not yet implemented")
-    }
+    override fun createQuickFix(element: KtQualifiedExpression, context: Unit):
+            KotlinModCommandQuickFix<KtQualifiedExpression> = AddColumnFix()
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): KtVisitor<*, *> {
         return qualifiedExpressionVisitor { qualifiedExpression ->

@@ -7,10 +7,7 @@ import org.jetbrains.kotlin.analysis.api.KaSession
 import org.jetbrains.kotlin.idea.base.resources.KotlinBundle
 import org.jetbrains.kotlin.idea.codeinsight.api.applicable.inspections.KotlinApplicableInspectionBase
 import org.jetbrains.kotlin.idea.codeinsight.api.applicable.inspections.KotlinModCommandQuickFix
-import org.jetbrains.kotlin.idea.intentions.callExpression
-import org.jetbrains.kotlin.idea.intentions.calleeName
 import org.jetbrains.kotlin.psi.KtCallExpression
-import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtNameReferenceExpression
 import org.jetbrains.kotlin.psi.KtQualifiedExpression
 import org.jetbrains.kotlin.psi.KtStringTemplateExpression
@@ -23,8 +20,10 @@ class AddColumnInspection : KotlinApplicableInspectionBase.Simple<KtQualifiedExp
         return KotlinBundle.message("column.name.may.be.moved.into.builder.dsl")
     }
 
-    override fun createQuickFix(element: KtQualifiedExpression, context: Unit):
-            KotlinModCommandQuickFix<KtQualifiedExpression> = AddColumnFix()
+    override fun createQuickFix(
+        element: KtQualifiedExpression,
+        context: Unit
+    ): KotlinModCommandQuickFix<KtQualifiedExpression> = AddColumnFix()
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): KtVisitor<*, *> {
         return qualifiedExpressionVisitor { qualifiedExpression ->

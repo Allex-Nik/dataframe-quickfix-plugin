@@ -11,6 +11,12 @@
     <extensions defaultExtensionNs="com.intellij">
         <toolWindow factoryClass="com.github.allexnik.dataframequickfixplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
         <postStartupActivity implementation="com.github.allexnik.dataframequickfixplugin.startup.MyProjectActivity" />
+        <localInspection language="kotlin"
+                         shortName="AddColumnInspection"
+                         displayName="Move column name into builder DSL"
+                         groupName="Kotlin"
+                         enabledByDefault="true"
+                         implementationClass="com.github.allexnik.dataframequickfixplugin.inspections.AddColumnInspection"/>
     </extensions>
 
     <actions>

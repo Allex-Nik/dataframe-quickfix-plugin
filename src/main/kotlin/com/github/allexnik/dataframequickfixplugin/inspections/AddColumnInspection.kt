@@ -25,38 +25,23 @@ class AddColumnInspection : KotlinApplicableInspectionBase.Simple<KtQualifiedExp
         context: Unit
     ): KotlinModCommandQuickFix<KtQualifiedExpression> = AddColumnFix()
 
-//    override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): KtVisitor<*, *> {
-//        return qualifiedExpressionVisitor { qualifiedExpression ->
-//            visitTargetElement(qualifiedExpression, holder, isOnTheFly)
-//        }
-//    }
-
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): KtVisitor<*, *> {
-        println("Building visitor for file")
-
         return qualifiedExpressionVisitor { qualifiedExpression ->
-            println("Found qualified expression: ${qualifiedExpression.text}")
             visitTargetElement(qualifiedExpression, holder, isOnTheFly)
         }
     }
 
     override fun isApplicableByPsi(element: KtQualifiedExpression): Boolean {
-        println("Checking element: $element")
-
         val selector = element.selectorExpression as? KtCallExpression ?: return false
         val calleeExpr = selector.calleeExpression as? KtNameReferenceExpression ?: return false
         if (calleeExpr.getReferencedName() != "add") return false
 
         val arguments = selector.valueArguments
-        if (arguments.size != 1) return false
-
-        val firstArg = arguments.first().getArgumentExpression() ?: return false
+        val firstArg = arguments.firstOrNull()?.getArgumentExpression() ?: return false
         if (firstArg !is KtStringTemplateExpression) return false
 
         val lambda = selector.lambdaArguments.singleOrNull()?.getLambdaExpression() ?: return false
         if (lambda.bodyExpression == null) return false
-
-
 
 //        return lambda.bodyExpression?.statements?.any { it.text.contains("from") } != true
         return true

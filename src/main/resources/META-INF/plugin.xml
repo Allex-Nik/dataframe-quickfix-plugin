@@ -5,6 +5,9 @@
     <vendor>allex-nik</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
+
+    <idea-version since-build="251" until-build="251.*"/>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 

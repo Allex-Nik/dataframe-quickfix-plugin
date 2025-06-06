@@ -26,26 +26,41 @@ class AddColumnFix: KotlinModCommandQuickFix<KtQualifiedExpression>() {
 
         val receiverText = receiver.text
 
+        println("Getting the operation sign")
+
         // qualifiedExpression is either KtSafeQualifiedExpression or KtDotQualifiedExpression
         val operationSign = when (qualifiedExpression) {
             is KtSafeQualifiedExpression -> "?."
             else -> "."
         }
 
+        println("Getting selector expression")
+
         // Get a selector expression (for example, add("columnName") { 42 })
         val selector = qualifiedExpression.selectorExpression as? KtCallExpression ?: return
+
+        println("Getting callee expression")
 
         // Get a callee expression (for example, add)
         val calleeExpr = selector.calleeExpression as? KtNameReferenceExpression ?: return
         val calleeText = calleeExpr.getReferencedName()
 
+        println("Getting argument expression")
+
+        val arguments = selector.valueArguments
+        println("Argument count: ${arguments.size}")
+
         // Get an argument expression (for example, "columnName")
-        val argument = selector.valueArguments.singleOrNull()?.getArgumentExpression() ?: return
+        val argument = arguments.firstOrNull()?.getArgumentExpression() ?: return
         val argumentText = argument.text
+
+        println("Getting lambda expression")
 
         // Get a lambda expression (for example, { 42 })
         val lambda = selector.lambdaArguments.singleOrNull()?.getLambdaExpression() ?: return
         val lambdaText = lambda.text
+
+        println("Creating new expression")
 
         // Create a new qualified expression
         val newQualifiedExpression = psiFactory.createExpression(
@@ -56,8 +71,11 @@ class AddColumnFix: KotlinModCommandQuickFix<KtQualifiedExpression>() {
                 """.trimIndent()
         )
 
+        println("Obtaining result")
+
         val result = qualifiedExpression.replaced(newQualifiedExpression)
 
+        println("Getting selector expression")
         result.containingKtFile.commitAndUnblockDocument()
     }
 
@@ -66,6 +84,7 @@ class AddColumnFix: KotlinModCommandQuickFix<KtQualifiedExpression>() {
         element: KtQualifiedExpression,
         updater: ModPsiUpdater
     ) {
+        println("Applying fix")
         apply(element)
     }
 }

@@ -1,5 +1,6 @@
 package com.github.allexnik.dataframequickfixplugin.quickfixes
 
+import com.github.allexnik.dataframequickfixplugin.MyBundle
 import com.intellij.codeInspection.util.IntentionFamilyName
 import com.intellij.modcommand.ModPsiUpdater
 import com.intellij.openapi.project.Project
@@ -14,7 +15,7 @@ import org.jetbrains.kotlin.psi.KtQualifiedExpression
 import org.jetbrains.kotlin.psi.KtSafeQualifiedExpression
 
 class AddColumnFix: KotlinModCommandQuickFix<KtQualifiedExpression>() {
-    override fun getName(): String = KotlinBundle.message("move.column.name.and.lambda.into.builder.dsl")
+    override fun getName(): String = MyBundle.message("move.column.name.and.lambda.into.builder.dsl")
 
     override fun getFamilyName(): @IntentionFamilyName String = name
 

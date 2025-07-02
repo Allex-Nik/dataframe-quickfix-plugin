@@ -16,6 +16,7 @@
                          shortName="AddColumnInspection"
                          groupName="Kotlin"
                          enabledByDefault="true"
+                         level="WEAK WARNING"
                          implementationClass="com.github.allexnik.dataframequickfixplugin.inspections.AddColumnInspection"
                          key="inspection.add.column.inspection.display.name"/>
     </extensions>

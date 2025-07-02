@@ -2,6 +2,7 @@ package com.github.allexnik.dataframequickfixplugin.inspections
 
 import com.github.allexnik.dataframequickfixplugin.MyBundle
 import com.github.allexnik.dataframequickfixplugin.quickfixes.AddColumnFix
+import com.intellij.codeInspection.ProblemHighlightType
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.codeInspection.util.InspectionMessage
 import org.jetbrains.kotlin.analysis.api.KaSession
